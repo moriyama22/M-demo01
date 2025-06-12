@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>新規アカウント作成</title>
+	
+	<style>
+	
+		body{
+	    	background-color: #f5f5f5;
+	    	margin-top: 150px;
+    	}
+    	
+    	header {
+    		width: 100%;/*横幅いっぱいに指定*/
+    		height: 50px;/*高さ50pxに指定*/
+    		background: #CCC;/*背景をグレーに指定*/
+    		padding: 20px 50px;/*ヘッダーに上下左右それぞれ余白を指定*/
+    		box-sizing: border;/*padding分を含んだ幅を１００％にするため*/
+    		position: fixed; /* ウィンドウを基準に画面に固定 */
+    		top: 0; /* 上下の固定位置を上から0pxにする */
+		    left: 0; /* 左右の固定位置を左から0pxにする */
+		    display: flex; /* 中の要素を横並びにする */
+		    align-items: center; /* 中の要素を上下中央に並べる */
+		 }
+    		
+    	.new rd, .new th {
+    		padding: 10px 0; /*解答表の上下間隔を開ける*/
+    		}
+    		
+    	.new th {
+    		text-align: left; /*テキストを左寄せにする*/
+    		padding-right: 20px;
+    	}
+    	
+    	.go, .back {
+    		display: inline-block;
+    		margin-top: 100px;
+    		margin-right: 100px;
+    		margin-left: 100px;
+    		
+    		display       : inline-block;
+		  font-size     : 10pt;        /* 文字サイズ */
+		  text-align    : center;      /* 文字位置   */
+		  cursor        : pointer;     /* カーソル   */
+		  padding       : 10px 35px;   /* 余白       */
+		  background    : #99ccff;     /* 背景色     */
+		  color         : #000000;     /* 文字色     */
+		  line-height   : 1em;         /* 1行の高さ  */
+		  transition    : .3s;         /* なめらか変化 */
+		  border        : 2px solid #99ccff;    /* 枠の指定 */
+		  border-radius: 50px; /*　四隅の角を丸く */
+    		}
+    	
+    </style>
+</head>
+
+<body>
+	<header>
+		<h1>Mテスト アプリ</h2>
+			
+	</header>
+	<br>
+	<center>
+	<h2>新規アカウント作成</h2>
+	
+	<form action = "/newMail" method = "post">
+	
+		<br>
+		<table class="new">
+		
+		<tr th:if"${duplicateError}">
+		<th></th>
+		<td th:text="${message}" style="color: black;"></td>
+		</tr>
+			
+			<tr>
+				<th><label>メールアドレス  </label></th>
+				<td><input type = "email" name = "email" placeholder = " " size="50" required></input></td>
+			</tr>
+			
+			<tr>
+			<th></th>
+			<td th:text="${mail2Error}" style="color: red;"></td>
+			</tr>
+			
+		</table>
+		<br>
+		<input class="back" type="button" onclick="location.href='./login'" value = "戻る"></input>
+		<input class="go" type="submit" value = "送信"></input>
+			
+	</center>
+	</form>
+</body>
+
+</html>

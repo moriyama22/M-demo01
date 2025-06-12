@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>お知らせ詳細</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>タイトル</th>
+        <th>作成日</th>
+    </tr>
+    <tr th:each="news : ${newsList}">
+        <td>
+            <a th:href="@{/news/detail/{id}(id=${news.id})}" th:text="${news.title}"></a>
+        </td>
+        <td th:text="${news.createdAt}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

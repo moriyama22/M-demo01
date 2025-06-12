@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>お知らせ投稿</title>
+	<style>
+	        body {
+	            font-family: Arial, sans-serif;
+	            margin: 0;
+	            padding: 0;
+	        }
+
+	        header {
+	            background-color: #4CAF50;
+	            color: white;
+	            padding: 10px 20px;
+				display: flex; /* 中の要素を横並びにする */
+				align-items: center; /* 中の要素を上下中央に並べる */
+	        }
+			
+			header .menu {
+				display: flex; /*中の要素を横並びにする*/
+				margin-right: 50px;
+				margin-left: 50px; /* メニューそれぞれに間隔をあけるため */
+				list-style: none; /* リストの[・]を消す */
+			}
+
+			header .menu li + li {
+			    margin-left: 40px; /* メニューそれぞれに間隔をあけるため */
+			}
+
+
+	        .admin-menu {
+	            padding: 20px;
+	        }
+
+	        .admin-menu button {
+	            padding: 10px 20px;
+	            background-color: #4CAF50;
+	            color: white;
+	            border: none;
+	            border-radius: 5px;
+	            cursor: pointer;
+	        }
+
+	        .admin-menu button:hover {
+	            background-color: #45a049;
+	        }
+			
+			.main {
+			    width: fit-content;
+			    margin: auto;
+			}
+			label {
+			    display: inline-block;
+			    width: 150px;
+			    vertical-align: top;
+			}
+			
+			.ismessage {
+				width: fit-content;
+				margin: auto;
+			}
+			
+			.noticeIiran {
+				width: fit-content;
+				width: 800px;
+				margin-top: 50px; 
+				margin-left: 30%; 
+				
+			}
+			
+			.notice-container {
+			    max-height: 500px;  /* 表示領域の最大高さ（適宜変更） */
+				max-width: 700px;
+				overflow-y: auto;   /* 縦スクロールを可能にする */
+				border: 1px solid #ccc;  /* 見た目の調整（枠線） */
+				padding: 10px;
+				background: #f9f9f9; /* 背景色 */
+			}
+
+			.notice-list {
+			    display: grid;
+			    grid-template-columns: 1fr;
+			    gap: 20px;
+			}
+
+			.notice-card {
+			    background-color: #f9f9f9;
+			    border: 1px solid #ddd;
+			    border-radius: 8px;
+			    padding: 15px;
+			    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+				
+			}
+
+			.notice-card a {
+			    display: flex;
+			    justify-content: space-between; /* タイトルと日付を両端に配置 */
+			    align-items: center;
+			    font-size: 18px;
+			    color: #333;
+			}
+
+			.notice-date {
+			    font-size: 14px;
+			    color: #666;
+			    margin-left: 10px;
+			}
+
+			.notice-content {
+			    white-space: pre-wrap; /* 改行をそのまま適用 */
+			    font-size: 14px;
+			    color: #666;
+			}
+
+			.notice-card p {
+			    margin: 5px 0;
+			    font-size: 14px;
+			    color: #666;
+			}
+			
+			.notice-card a {
+				text-decoration: none;
+			}
+			
+			.notice-container::-webkit-scrollbar {
+			width: 8px; /* スクロールバーの幅 */
+			}
+
+			.notice-container::-webkit-scrollbar-thumb {
+			background: #888; /* スクロールバーの色 */
+			border-radius: 4px;
+			}
+
+			.notice-container::-webkit-scrollbar-thumb:hover {
+			background: #555; /* ホバー時の色 */
+			}
+
+			@media screen and (max-width: 600px) {
+			.notice-container {
+			max-height: 200px; /* 小さい画面用に高さを調整 */
+			}
+			
+	    </style>
+</head>
+
+<body>
+	<header>
+    	<h1>お知らせ投稿</h1>
+		<ul class="menu">
+			<li><a href="/Dashboard">Home</a></li>
+		</ul>
+	</header>
+	
+	
+	
+    <form class="main" action="/admin/postNotice" method="post">
+		
+        <p>
+            <label>タイトル</label>
+            <input type="text" name="title" size="30" required>
+        </p>
+        <p>
+            <label>内容</label>
+            <textarea name="content" rows="10" cols="32" required></textarea>
+        </p>
+        <button class="submitButton" type="submit">投稿</button>
+    </form>
+	
+	<form class="ismessage" >
+			<tr th:if="${message}">
+			    <th></th>
+			    <td th:text="${message}" style="color: red;"></td>
+			</tr>
+		
+			<tr th:if="${error}">
+			    <th></th>
+			    <td th:text="${error}" style="color: red;"></td>
+			</tr>
+		</form>
+		
+		<form class="noticeIiran">
+		<h2>お知らせ一覧</h2>
+			<div class="notice-list">
+			   <th:block th:each="notice : ${notices}">
+			        <div class="notice-card">
+						<a th:href="@{/postNotice/{seq}(seq=${notice.seq})}">
+						    <span th:text="${notice.title}">お知らせタイトル</span>
+						</a>
+						<span class="notice-date" th:text="${notice.formattedDate}">yyyy-MM-dd HH:mm:ss</span>
+						<pre class="notice-content" th:utext="${notice.content}">お知らせ内容</pre>
+
+			        </div>
+			    </th:block>
+			</div>
+		</form>
+		
+		
+		
+</body>
+
+</html>

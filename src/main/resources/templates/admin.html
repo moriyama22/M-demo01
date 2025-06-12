@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>管理画面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+			display: flex; /* 中の要素を横並びにする */
+			align-items: center; /* 中の要素を上下中央に並べる */
+        }
+		
+		header .menu {
+			display: flex; /*中の要素を横並びにする*/
+			margin-right: 50px;
+			margin-left: 50px; /* メニューそれぞれに間隔をあけるため */
+			list-style: none; /* リストの[・]を消す */
+		}
+		
+		header .menu li + li {
+		    margin-left: 40px; /* メニューそれぞれに間隔をあけるため */
+		}
+
+        .admin-menu {
+            padding: 20px;
+			margin-top: 20px;
+        }
+
+        .admin-menu button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .admin-menu button:hover {
+            background-color: #45a049;
+        }
+		
+		.usreButton, .postNoticeButton{
+			margin-top: 20px;
+		}
+		
+		.back {
+		    display: inline-block;
+		    margin-top: 100px;
+		    margin-right: 100px;
+		    margin-left: 100px;
+		    font-size: 10pt;
+		    text-align: center;
+		    cursor: pointer;
+		    padding: 10px 35px;
+		    background: #99ccff;
+		    color: #000000;
+		    line-height: 1em;
+		    transition: .3s;
+		    border: 2px solid #99ccff;
+		    border-radius: 50px;
+		}
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>管理者画面</h1>
+		<ul class="menu">
+			<li><a href="/Dashboard">Home</a></li>
+		</ul>
+    </header>
+    <div class="admin-menu">
+		<button class="usreButton" onclick="location.href='/admin/user'">ユーザー管理</button>
+		<br>
+        <button class="postNoticeButton" onclick="location.href='/admin/postNotice'">お知らせを投稿</button>
+		<br>
+		<button class="postNoticeButton" onclick="location.href='/contact/admin/inquiry_list'">お問い合わせ一覧</button>
+    </div>
+	
+	<input class="back" type="button" onclick="location.href='./Dashboard'" value="戻る">
+</body>
+
+</html>

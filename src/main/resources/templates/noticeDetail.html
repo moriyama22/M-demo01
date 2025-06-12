@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>お知らせ詳細</title>
+</head>
+<body>
+    <h1>お知らせ詳細</h1>
+    <p><strong>タイトル:</strong> <span th:text="${notice.title}"></span></p>
+    <p><strong>内容:</strong> <span th:text="${notice.content}"></span></p>
+
+    <form action="/notice/update" method="post">
+        <input type="hidden" name="seq" th:value="${notice.seq}">
+        <label>
+            表示状態:
+            <select name="adflag">
+                <option value="0" th:selected="${notice.adflag == '0'}">表示</option>
+                <option value="1" th:selected="${notice.adflag == '1'}">非表示</option>
+            </select>
+        </label>
+        <button type="submit">更新</button>
+    </form>
+
+    <a href="/postNotice">一覧に戻る</a>
+</body>
+</html>

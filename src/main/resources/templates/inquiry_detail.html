@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>お問合せ詳細</title>
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body>
+    <header>
+        <h1>お問合せ詳細</h1>
+        <a href="/contact/admin/inquiry_list">お問合せ一覧へ戻る</a>
+    </header>
+
+    <main>
+        <h2>お問合せ内容</h2>
+        <p><strong>ID:</strong> <span th:text="${inquiry.id}"></span></p>
+        <p><strong>ユーザーID:</strong> <span th:text="${inquiry.userId}"></span></p>
+        <p><strong>カテゴリ:</strong> 
+			<span th:switch="${inquiry.category}">
+			       <span th:case="'login'">ログインについて</span>
+			       <span th:case="'password'">パスワード変更</span>
+			       <span th:case="'feature'">機能について</span>
+			       <span th:case="'other'">その他</span>
+			       <span th:case="*">不明</span> <!-- デフォルト（どれにも当てはまらない場合） -->
+			   </span>
+			</p>
+        <p><strong>タイトル:</strong> <span th:text="${inquiry.title}"></span></p>
+        <p><strong>詳細:</strong></p>
+        <pre th:text="${inquiry.details}"></pre>
+
+		<!-- 画像がある場合 -->
+		<div th:if="${inquiry.imagePath}">
+		    <h3>添付画像</h3>
+		    <img th:src="@{${inquiry.imagePath}}" alt="添付画像" width="300">
+		</div>
+		
+		<div th:if="${inquiry.imagePath == null or inquiry.imagePath == ''}">
+		    <p>画像なし</p>
+		</div>
+
+        <h2>管理者返信</h2>
+        <form action="/contact/admin/reply" method="post">
+            <input type="hidden" name="inquiryId" th:value="${inquiry.id}">
+            <label for="message">返信内容:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+            <button type="submit">送信</button>
+        </form>
+    </main>
+</body>
+</html>

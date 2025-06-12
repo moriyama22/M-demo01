@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>お問合せ一覧</title>
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body>
+    <header>
+        <h1>お問合せ一覧</h1>
+        <a href="/dashboard">ダッシュボードへ戻る</a>
+    </header>
+
+    <main>
+		
+		<form th:action="@{/contact/admin/inquiries/search}" method="GET">
+			<label>お問い合わせ番号:</label>
+			<input type="text" name="id" th:value="${param.id}">
+			
+		    <label>タイトル:</label>
+		    <input type="text" name="title" th:value="${param.title}">
+		    
+		    <label>カテゴリ:</label>
+			<select name="category">
+			    <option value="" th:selected="${param.category == ''}">選択してください</option>
+			    <option value="login" th:selected="${param.category == 'login'}">ログインについて</option>
+			    <option value="password" th:selected="${param.category == 'password'}">パスワード変更</option>
+			    <option value="feature" th:selected="${param.category == 'feature'}">機能について</option>
+			    <option value="other" th:selected="${param.category == 'other'}">その他</option>
+			</select>
+		    
+		    <label>ステータス:</label>
+			<select name="status">
+			    <option value="-1" th:selected="${param.status == '-1'}">すべて</option>
+			    <option value="0" th:selected="${param.status == '0'}">未対応</option>
+			    <option value="1" th:selected="${param.status == '1'}">対応済み</option>
+			</select>
+		    
+		    <button type="submit">検索</button>
+			
+		</form>
+		
+		<table border="1">
+		    <thead>
+		        <tr>
+		            <th>問い合わせ番号</th>
+		            <th>タイトル</th>
+		            <th>カテゴリ</th>
+		            <th>ステータス</th>
+		            <th>お問合せ日時</th>
+					<th>返信日時</th>
+					<th>詳細</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <tr th:each="inquiry : ${inquiries}">
+		            <td th:text="${inquiry.id}"></td>
+		            <td th:text="${inquiry.title}"></td>
+					<td>
+						<span th:switch="${inquiry.category}">
+						<span th:case="'login'">ログインについて</span>
+						<span th:case="'password'">パスワード変更</span>
+						<span th:case="'feature'">機能について</span>
+						<span th:case="'other'">その他</span>
+						<span th:case="*">不明</span> <!-- デフォルト（どれにも当てはまらない場合） -->
+						</span>
+					</td>
+		            <td>
+		                <span th:if="${inquiry.status == 0}">未対応</span>
+		                <span th:if="${inquiry.status == 1}">対応済み</span>
+		            </td>
+		            <td th:text="${#temporals.format(inquiry.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
+					<td th:text="${#temporals.format(inquiry.updatedAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
+					<td><a th:href="@{/contact/admin/inquiries/{id}(id=${inquiry.id})}">詳細を見る</a></td>
+		        </tr>
+		    </tbody>
+		</table>
+		<div th:if="${totalElements > 0}">
+		    <p>
+		        全 <span th:text="${totalElements}"></span> 件中、
+		        <span th:text="${currentPage * pageSize + 1}"></span>
+		        ～
+		        <span th:text="${(currentPage + 1) * pageSize > totalElements ? totalElements : (currentPage + 1) * pageSize}"></span>
+		        件を表示
+		    </p>
+		</div>
+		
+		<br>
+
+		<div>
+		    <span th:each="pageNum : ${#numbers.sequence(0, totalPages - 1)}">
+		        <a th:href="@{/contact/admin/inquiries/search(id=${param.id}, title=${param.title}, category=${param.category}, status=${param.status}, page=${pageNum})}"
+		           th:text="${pageNum + 1}"
+		           th:classappend="${pageNum == currentPage} ? 'active-page' : ''">
+		        </a>
+		        <span th:if="${pageNum < totalPages - 1}">|</span>
+		    </span>
+		</div>
+
+    </main>
+</body>
+</html>

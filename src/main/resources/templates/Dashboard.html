@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>タスクダッシュボード画面</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+    <header>
+        <h1> Mテスト アプリ</h1>
+        
+        <!-- ユーザー情報をヘッダーに表示 -->
+        <div class="user-info">
+            <span>ID: <span th:text="${session.loggedInAccount.id}"></span></span>
+            <span>名前: <span th:text="${session.loggedInAccount.name}"></span></span>
+        </div>
+        
+        <form action="/dashboard" method="post">
+            <div class="gnavi__wrap">
+                <ul class="gnavi__lists">
+                    <li class="gnavi__list">
+                        <a href="#">タスク</a>
+                        <ul class="dropdown__lists">
+                            <li class="dropdown__list"><a href="#">タスク作成</a></li>
+                            <li class="dropdown__list"><a href="#">タスク管理</a></li>
+                        </ul>
+                    </li>
+                    <li class="gnavi__list">
+                    	<a href="#">メニュータイトル</a>
+                    	<ul class="dropdown__lists">
+                            <li class="dropdown__list"><a href="#">メニュー1</a></li>
+                            <li class="dropdown__list"><a href="#">メニュー2</a></li>
+                            <li class="dropdown__list"><a href="#">メニュー3</a></li>
+                        </ul>
+                    	</li>
+                    <li class="gnavi__list">
+                    	<a href="#">メニュータイトル</a>
+                    	<ul class="dropdown__lists">
+                            <li class="dropdown__list"><a href="#">メニュー1</a></li>
+                            <li class="dropdown__list"><a href="#">メニュー2</a></li>
+                            <li class="dropdown__list"><a href="#">メニュー3</a></li>
+                        </ul>
+                    	</li>
+                    <li class="gnavi__list">
+                    	<a href="#">メニュータイトル</a>
+                    	<ul class="dropdown__lists">
+                            <li class="dropdown__list"><a href="#">メニュー1</a></li>
+                            <li class="dropdown__list"><a href="#">メニュー2</a></li>
+                            <li class="dropdown__list"><a href="#">メニュー3</a></li>
+                        </ul>
+                    	</li>
+                    <li class="gnavi__list">
+                    	<a href="#">オプション</a>
+                    	<ul class="dropdown__lists">
+                            <li class="dropdown__list"><a href="#">アカウント設定</a></li>
+                            <li class="dropdown__list"><a href="#">メニュー2</a></li>
+                            <li class="dropdown__list"><a href="/otoiawase">お問い合わせ</a></li>
+                        </ul>
+                    	</li>
+                    <li class="gnavi__list" th:if="${session.userRole == 9}">
+                    <a href="#">管理者</a>
+                    <ul class="dropdown__lists">
+                        <li class="dropdown__list"><a href="/admin">管理</a></li>
+                    </ul>
+                </li>
+                </ul>
+            </div>
+        </form>
+        
+        <form action="/logout" method="post" class="logout-form" >
+        	<button type="submit" class="logout-button">ログアウト</button>
+        </form>
+        
+    </header>
+
+    <main>
+        <article>
+        <!--
+            <div class="side">
+                ID : <span th:text="${session.loggedInAccount.id}"></span>
+                <br>
+                名前 : <span th:text="${session.loggedInAccount.name}"></span>
+                <ul class="accountMenu">
+                    <li><a href="/account">アカウント設定</a></li>
+                    <li></li>
+                    <li></li>
+                    <li>
+                        <div class="menuAdmin">
+                            <span th:if="${session.userRole == 9}">
+                                <a href="/admin">管理者</a>
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>-->
+			
+			
+            <div class="main">
+                <h2>お知らせ一覧</h2>
+                <div class="notice-container">
+                    <div class="notice-list">
+                        <th:block th:each="notice : ${notices}">
+                            <div class="notice-card">
+                                <h3>
+                                    <span th:text="${notice.title}">お知らせタイトル</span>
+                                    <span class="notice-date" th:text="${notice.formattedDate}">yyyy-MM-dd HH:mm:ss</span>
+                                </h3>
+                                <pre class="notice-content" th:utext="${notice.content}">お知らせ内容</pre>
+                            </div>
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- <script th:src="@{/js/menu.js}"></script> -->
+</body>
+</html>

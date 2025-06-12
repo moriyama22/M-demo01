@@ -1,0 +1,238 @@
+body {
+    background-color: #f5f5f5;
+    margin-top: 150px;
+}
+
+/* ============================
+   ヘッダー全体のスタイル
+   ============================ */
+header {
+    width: 100%;
+    height: 80px;
+    background: #CCC;
+    padding: 20px 50px;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+}
+
+
+/* ===========================
+   メニュー（ヘッダーのナビ）
+=========================== */
+.gnavi__wrap {
+    width: 800px;
+    margin-left: 10%;
+}
+
+.gnavi__lists {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    justify-content: space-around; /* 均等配置 */
+}
+
+.gnavi__list {
+	flex: 1; /* 均等に広げる */
+    width: 20%;
+    height: 50px;
+    background-color: #E3F2FD;
+    position: relative;
+    transition: all .3s;
+	margin-right: 5px; /* メニュー間の余白 */
+}
+
+/* ホバー時の背景色変更 */
+.gnavi__list:hover {
+    background-color: #1565C0; /* メニューにカーソルを合わせた時の色 */
+}
+
+.gnavi__list:not(:first-child)::before {
+    content: "";
+    width: 1px;
+    height: 100%;
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all .3s;
+}
+
+.gnavi__list a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: #0D47A1;
+    font-size: 15px;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    transition: all .3s;
+}
+
+.gnavi__list:hover a {
+    color: #fff; /* ホバー時の文字色 */
+}
+
+/* ===========================
+   サブメニュー（ドロップダウン）
+=========================== */
+.dropdown__lists {
+    display: none;
+    width: 100%;
+    position: absolute;
+    top: 50px;
+    left: 0;
+	background-color: #1565C0;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	border-radius: 4px;
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out;
+	list-style: none; /* リストの点を消す */
+	padding-left: 0; /* 左の余白を削除 */
+	
+}
+
+/* 親メニューにカーソルを合わせたら表示 */
+.gnavi__list:hover .dropdown__lists {
+    display: block;
+	opacity: 1;
+}
+
+/* サブメニューのデフォルト状態 */
+.dropdown__list {
+	align-items: center; /* 縦方向の中央揃え */
+	display: flex; /* フレックスボックス適用 */
+    background-color: #004d80;
+    height: 50px;
+    transition: all .3s;
+    /*position: relative;*/
+}
+
+.dropdown__list:not(:first-child)::before {
+    content: "";
+    width: 100%;
+    height: 1px;
+    background-color: #64B5F6;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* サブメニューにカーソルを合わせた時の背景色 */
+.dropdown__list:hover {
+    background: #FFA726; /* ホバー時の背景色（オレンジ） */
+}
+
+.dropdown__list a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+	padding: 10px 0;
+    position: relative;
+}
+
+/* サブメニューのアイコン（矢印） */
+.dropdown__list a::before {
+    content: none;
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    transform: rotate(135deg);
+    position: absolute;
+    right: 15px;
+    top: calc(50% - 5px);
+}
+
+
+/* ===========================
+   ユーザー情報
+=========================== */
+.user-info {
+    font-size: 14px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ===========================
+   ログアウトボタン
+=========================== */
+.logout-form {
+    margin-left: auto;
+}
+
+.logout-button {
+    padding: 8px 15px;
+    background-color: #99ccff;
+    color: black;
+    border: 2px solid #99ccff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.logout-button:hover {
+    background-color: #0071BB;
+    color: white;
+}
+
+/* ===== ここから `Dashboard.html` のデザインを維持 ===== */
+
+/* フォーム全体 */
+main {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+/* ラベルと入力欄 */
+label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* 送信ボタン */
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+button:hover {
+    background-color: #45a049;
+}
+
+/* スマホ対応 */
+@media screen and (max-width: 600px) {
+    .notice-container {
+        max-height: 200px;
+    }
+}

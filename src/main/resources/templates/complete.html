@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>新規アカウント作成</title>
+    <style>
+        body {
+            background-color: #f5f5f5;
+            margin-top: 150px;
+        }
+        header {
+            width: 100%;
+            height: 70px;
+            background: #CCC;
+            padding: 20px 50px;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+        }
+        .new rd, .new th {
+            padding: 10px 0;
+        }
+        .new th {
+            text-align: left;
+            padding-right: 20px;
+        }
+        .value-box {
+            background-color: #ffffff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            width: 100%;
+            box-sizing: border-box;
+            width: 300px;
+            text-align: center;
+        }
+        .go, .back {
+            display: inline-block;
+            margin-top: 100px;
+            margin-right: 100px;
+            margin-left: 100px;
+            display: inline-block;
+            font-size: 10pt;
+            text-align: center;
+            cursor: pointer;
+            padding: 10px 35px;
+            background: #99ccff;
+            color: #000000;
+            line-height: 1em;
+            transition: .3s;
+            border: 2px solid #99ccff;
+            border-radius: 50px;
+        }
+		
+		li{
+		  list-style:none;
+		}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>M テスト アプリ</h1>
+    </header>
+    <br>
+    <center>
+        <h2>新規アカウント登録完了画面</h2>
+        <form action="/complete" method="post">
+        	
+			<h1>アカウント登録完了</h1>
+			    <p>以下の情報でアカウントが登録されました</p>
+			    <ul>
+			        <li>名前: <span th:text="${name}"></span></li>
+			        <li>ID: <span th:text="${id}"></span></li>
+					<li>メールアドレス: <span th:text="${mail}"></span></li>
+					
+					
+					<a class="back" href="./login">ログイン画面へ</a>
+
+
+        </form>
+    </center>
+</body>
+</html>
