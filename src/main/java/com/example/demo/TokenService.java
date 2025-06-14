@@ -1,5 +1,5 @@
 package com.example.demo;
-
+/**
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import com.example.demo.entity.MailTokun;
 import com.example.demo.repository.*;
-
+*/
 
 /**		@Service
 		public class TokenService {
