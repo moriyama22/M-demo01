@@ -2,7 +2,7 @@
 FROM gradle:8.7.0-jdk17 AS builder
 WORKDIR /app
 COPY . .
-RUN gradle build -x test
+RUN ./gradlew build -x test
 
 # ---- 実行フェーズ（軽量化）----
 FROM eclipse-temurin:17-jdk-alpine
