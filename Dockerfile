@@ -1,5 +1,5 @@
 # ---- ビルドフェーズ ----
-FROM gradle:8.7.0-jdk17 AS builder
+FFROM gradle:8.7.0-jdk21 AS builder
 WORKDIR /app
 COPY . .
 RUN ./gradlew build -x test
