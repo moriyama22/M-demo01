@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.demo.entity.Account;
 import com.example.demo.repository.AccountRepository;
-import com.example.*;
+
 
 @Service
 public class AccountService {
