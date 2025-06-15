@@ -50,7 +50,8 @@ public class NewPsController {
             passwordResetService.saveToken(account.getId(), token); // トークンをDBに保存
 
             // リセットURL
-            String resetUrl = "http://localhost:8080/resetPassword?token=" + token;
+            //String resetUrl = "http://localhost:8080/resetPassword?token=" + token;
+            String resetUrl = "https://tranquil-achievement-production.up.railway.app/resetPassword?token=" + token;
 
             // メール送信
             SimpleMailMessage mailMessage = new SimpleMailMessage();

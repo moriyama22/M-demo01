@@ -34,7 +34,8 @@ public class NewMail {
             String token = mailTokunService.generateAndSaveToken(email);
 
             // アカウント登録URL
-            String registrationUrl = "http://localhost:8080/register?token=" + token;
+            //String registrationUrl = "http://localhost:8080/register?token=" + token;
+            String registrationUrl = "https://tranquil-achievement-production.up.railway.app/register?token=" + token;
 
             // メールの送信
             SimpleMailMessage message = new SimpleMailMessage();
