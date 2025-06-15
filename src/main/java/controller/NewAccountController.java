@@ -101,8 +101,8 @@ public class NewAccountController {
             return "newAccount_R";
         }
 
-        // 重複チェック
-        if (accountRepository.findById(id) != null || accountRepository.findByMail(mail) != null) {
+        // 重複チェック（Optional を適切に判定）
+        if (accountRepository.findById(id).isPresent() || accountRepository.findByMail(mail).isPresent()) {
             model.addAttribute("duplicateError", "IDまたはメールアドレスが既に登録されています");
             return "newAccount_R";
         }
